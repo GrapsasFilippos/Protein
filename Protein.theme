@@ -1,0 +1,2 @@
+karamba x=100 y=100 w=250 h=80 locked=false interval=600000
+defaultfont color=255,255,255 font="Sans" fontsize=10 bgcolor=0,0,0 shadow=0

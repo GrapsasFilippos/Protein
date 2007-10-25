@@ -1,0 +1,177 @@
+#!/bin/bash
+#===========================
+# Script to give info about current f@h protein status, user, team, etc
+# Marios Andreopoulos
+# GPLv2 License
+#===========================
+
+GMT_diff=2
+
+unitinfo="$1/unitinfo.txt"
+clientcfg="$1/client.cfg"
+username=
+team=
+userPoints=
+userTeamRank=
+userGlobalRank=
+userWUs=
+systemUser=`whoami`
+user_data=
+proteinName=
+proteinSerial=
+proteinValue=
+proteinSince=
+proteinDue=
+proteinProgress=
+teamName=
+teamPoints=
+teamWUs=
+teamRank=
+runningTime=
+remainingTime=
+teamMembers=
+
+find_username(){
+  username=`grep username "${clientcfg}"|sed -e 's/username=//'`
+}
+
+find_team(){
+  team=`grep team "${clientcfg}"|sed -e 's/team=//'`
+}
+
+find_userpoints(){
+  find_username; find_team
+}
+
+set_user_data(){
+  userGlobalRank=$1
+  userTeamRank=$2
+  userPoints=$4
+  userWUs=$5
+}
+
+set_team_data(){
+  teamPoints=`grep "^${team}" "/tmp/${systemUser}/team${team}.txt"|sed -e 's/\(.*\)\t\(.*\)\t\(.*\)\t\(.*\)/\3/'`
+  teamWUs=`grep "^${team}" "/tmp/${systemUser}/team${team}.txt"|sed -e 's/\(.*\)\t\(.*\)\t\(.*\)\t\(.*\)/\4/'`
+  teamRank=`grep "Team rank" "/tmp/${systemUser}/team${team}.txt"|sed -e 's/.*: //'`
+  teamName=`grep "^${team}" "/tmp/${systemUser}/team${team}.txt"|sed -e 's/\(.*\)\t\(.*\)\t\(.*\)\t\(.*\)/\2/'`
+  teamMembers=`tail -n1 "/tmp/${systemUser}/team${team}.txt"|sed -e 's/\(.*\)\t\(.*\)\t\(.*\)\t\(.*\)\t\(.*\)\t\(.*\)/\2/'`
+}
+
+fetch_data(){
+  find_username
+  find_team
+#if team/user data exists we will check if it is old and needs redownloading
+  if [ -e "/tmp/${systemUser}/team${team}.txt" ]; then
+    teamtxtDate=`stat -c %Z "/tmp/${systemUser}/team${team}.txt"`
+    currentDate=`date +%s`
+    timeDifference=`echo "${currentDate} - ${teamtxtDate}"|bc`
+    if (( ${timeDifference} > 3600 )); then
+      cd /tmp/${systemUser}
+      wget -nv -N "http://vspx27.stanford.edu/teamstats/team${team}.txt" >/dev/null 2>&1
+    fi
+#team/user data doesn't exist so download anyway
+  else
+    mkdir /tmp/${systemUser} >/dev/null 2>&1
+    cd /tmp/${systemUser}
+    wget -nv -N "http://vspx27.stanford.edu/teamstats/team${team}.txt" >/dev/null 2>&1
+  fi
+  user_data=`grep ${username} "/tmp/${systemUser}/team${team}.txt"`
+}
+
+set_protein_data(){
+  proteinName=`grep Name "$unitinfo"|sed -e 's/.*: //'`
+  proteinSince=`grep Download "$unitinfo"|sed -e 's/.*time: //'`
+  proteinDue=`grep Due "$unitinfo"|sed -e 's/.*time: //'`
+  proteinProgress=`grep Progress  "$unitinfo"|sed -e 's/.* \(.*\)%.*/\1/'`
+  proteinSerial=`grep Name "$unitinfo"|sed -e 's/.*: p//' -e 's/_.*//'`
+}
+
+fetch_set_protein_value(){
+#if protein table exists we will check if it is old and needs redownloading
+  if [ -e "/tmp/${systemUser}/psummary.html" ]; then
+    proteintableDate=`stat -c %Z "/tmp/${systemUser}/team${team}.txt"`
+    currentDate=`date +%s`
+    timeDifference=`echo "${currentDate} - ${teamtxtDate}"|bc`
+    if (( ${timeDifference} > 86400 )); then
+      cd /tmp/${systemUser}
+      wget -nv -N "http://vspx27.stanford.edu/psummary.html" >/dev/null 2>&1
+    fi
+#protein table doesn't exist so download anyway
+  else
+    cd /tmp/${systemUser}
+    wget -nv -N "http://vspx27.stanford.edu/psummary.html" >/dev/null 2>&1
+  fi
+  proteinValue=`grep ${proteinSerial} "/tmp/${systemUser}/psummary.html"|sed -e 's/.*<TD>.*<TD>.*<TD>.*<TD>.*<TD>.*<TD>.*<TD>\(.*\)<\/TD><TD>.*<TD>.*<TD>.*<TD>.*/\1/' -e 's/ //g'`
+}
+  
+time_estimations(){
+	# Estimate hours to completion
+  NOW=$(expr $(date +%s) - $(expr $GMT_diff \* 3600))
+  START=$(date -d "$(grep Download $unitinfo  | sed -e 's/.*time: //')" +%s)
+  Running=$(expr $NOW - $START)
+  if (( Running < 0 )); then 					#Check if the unit started in the previous year.
+    if (( $(expr $(expr $(date +%G) - 1) % 4) == 0 )); then	#Check if the previous year was leap.
+      START=$(expr $START - 31622400)
+    else
+	   START=$(expr $START - 31536000)
+    fi
+    Running=$(expr $(expr $NOW - $START))
+  fi
+  if (( ${proteinProgress} == 0 )); then
+    Remaining=0
+  else
+    Remaining=$(expr $(expr $Running \* $(expr 100 - $proteinProgress)) / $proteinProgress)
+  fi
+  if (( $Remaining == 0 )); then					#Check if we can make estimations.
+    remainingTime='Not enough data to make estimations'
+  else
+    runningTime="$(expr $Running / 3600)h $(expr $(expr $Running % 3600) / 60)m"
+    remainingTime="$(expr $Remaining / 3600)h $(expr $(expr $Remaining % 3600) / 60)m"
+      if (( $proteinProgress < 10 )); then				#Check if accuracy is compromised by short progress.
+        remainingTime="${remainingTime} (rather inaccurate)"
+      fi
+  fi
+}
+
+
+#check if f@h files exist in the given path
+if [ ! -e ${unitinfo} ]; then echo Error; exit 1; fi
+if [ ! -e ${clientcfg} ]; then echo Error; exit 1; fi
+
+
+# do not change the order these routines run or you'll have problems (some routines can change order but NOT all)
+fetch_data
+set_user_data ${user_data}
+set_team_data
+set_protein_data
+fetch_set_protein_value
+time_estimations
+
+
+
+for ((i=$OPTIND; i<=$#; ++i)); do
+  case ${!i} in
+      username    ) echo $username;;
+      team        ) echo $team;;
+      globalRank  ) echo $userGlobalRank;;
+      userTeamRank    ) echo $userTeamRank;;
+      points      ) echo $userPoints;;
+      wu          ) echo $userWUs;;
+      protein     ) echo $proteinName;;
+      proteinSince) echo $proteinSince;;
+      proteinDue  ) echo $proteinDue;;
+      proteinProgress ) echo ${proteinProgress}%;;
+      proteinValue    ) echo $proteinValue;;
+      proteinSerial   ) echo $proteinSerial;;
+      teamRank    ) echo $teamRank;;
+      teamPoints  ) echo $teamPoints;;
+      teamWUs     ) echo $teamWUs;;
+      teamName    ) echo $teamName;;
+      runningTime ) echo $runningTime;;
+      remainingTime   ) echo $remainingTime;;
+      teamMembers ) echo $teamMembers;;
+      * )  ;;
+  esac
+done
+

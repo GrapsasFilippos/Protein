@@ -1,0 +1,501 @@
+<Theme>
+	<Author>
+		<author>Grapsas Filippos</author>
+		<author_email>graphi@ebox.gr</author_email>
+		<homepage>None</homepage>
+		<version>1</version>
+		<license>GPL</license>
+	</Author>
+	<Mode id='Theme'>
+		<version>1.1.1</version>
+		<w>207</w>
+		<h>202</h>
+		<i>600000</i>
+		<f>Sans</f>
+		<s>10</s>
+		<c>255,255,255</c>
+		<sw>0</sw>
+	</Mode>
+	<Mode id='Menu'>
+		<Item id="MenuStyle">c</Item>
+		<Item id='Background'>
+			<x>0</x>
+			<y>0</y>
+			<v>background.png</v>
+		</Item>
+	</Mode>
+	<Mode id='Progress'>
+		<Item id='LSince'>
+			<x>0</x>
+			<y>0</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Since:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TSince'>
+			<x>65</x>
+			<y>0</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LDue'>
+			<x>0</x>
+			<y>10</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Due:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TDue'>
+			<x>65</x>
+			<y>10</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LPoints'>
+			<x>0</x>
+			<y>20</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Points:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TPoints'>
+			<x>65</x>
+			<y>20</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LName'>
+			<x>0</x>
+			<y>30</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Name:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TName'>
+			<x>65</x>
+			<y>30</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LPercentage'>
+			<x>0</x>
+			<y>40</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Percentage:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TPercentage'>
+			<x>65</x>
+			<y>40</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LRemaining'>
+			<x>0</x>
+			<y>50</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Remaining:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TRemaining'>
+			<x>65</x>
+			<y>50</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LRunning'>
+			<x>0</x>
+			<y>60</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Running:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TRunning'>
+			<x>65</x>
+			<y>60</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LSerial'>
+			<x>0</x>
+			<y>70</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Serial:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TSerial'>
+			<x>65</x>
+			<y>70</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='BProgress'>
+			<x>0</x>
+			<y>190</y>
+			<v>barlines.png</v>
+		</Item>
+		<Item id='LProgress'>
+			<x>0</x>
+			<y>190</y>
+			<w>0</w>
+			<h>0</h>
+			<v>barload.png</v>
+		</Item>
+	</Mode>
+	<Mode id='Self'>
+		<Item id='LUsername'>
+			<x>0</x>
+			<y>80</y>
+			<w>60</w>
+			<h>12</h>
+			<v>UserName:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TUsername'>
+			<x>65</x>
+			<y>80</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LScore'>
+			<x>0</x>
+			<y>90</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Score:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TScore'>
+			<x>65</x>
+			<y>90</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LWUs'>
+			<x>0</x>
+			<y>100</y>
+			<w>60</w>
+			<h>12</h>
+			<v>WUs:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TWUs'>
+			<x>65</x>
+			<y>100</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LTeamRank'>
+			<x>0</x>
+			<y>110</y>
+			<w>60</w>
+			<h>12</h>
+			<v>TeamRank:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TTeamRank'>
+			<x>65</x>
+			<y>110</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LRank'>
+			<x>0</x>
+			<y>120</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Rank:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TRank'>
+			<x>65</x>
+			<y>120</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+	</Mode>
+	<Mode id='Team'>
+		<Item id='LTeamName'>
+			<x>0</x>
+			<y>130</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Name:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TTeamName'>
+			<x>65</x>
+			<y>130</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LScore'>
+			<x>0</x>
+			<y>140</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Score:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TScore'>
+			<x>65</x>
+			<y>140</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LWUs'>
+			<x>0</x>
+			<y>150</y>
+			<w>60</w>
+			<h>12</h>
+			<v>WUs:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TWUs'>
+			<x>65</x>
+			<y>150</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LRank'>
+			<x>0</x>
+			<y>160</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Rank:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TRank'>
+			<x>65</x>
+			<y>160</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LMembers'>
+			<x>0</x>
+			<y>170</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Members:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TMembers'>
+			<x>65</x>
+			<y>170</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+		<Item id='LTeamNumber'>
+			<x>0</x>
+			<y>180</y>
+			<w>60</w>
+			<h>12</h>
+			<v>Number:</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>RIGHT</align>
+		</Item>
+		<Item id='TTeamNumber'>
+			<x>65</x>
+			<y>180</y>
+			<w>140</w>
+			<h>12</h>
+			<v>Null</v>
+			<s>None</s>
+			<c>None</c>
+			<f>None</f>
+			<sw>None</sw>
+			<align>LEFT</align>
+		</Item>
+	</Mode>
+</Theme>
